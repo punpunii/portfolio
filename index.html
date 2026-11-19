@@ -53,6 +53,7 @@
             padding: 14px 22px;
             color: #1e3a6d;
             text-decoration: none;
+            cursor: pointer;
             /* เงา 3 มิติสีฟ้าเยื้องไปทางซ้ายล่าง */
             box-shadow: -6px 7px 0px #6ea4e8;
             transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), 
@@ -80,6 +81,7 @@
             height: 28px;
             background-color: #cbd5e1;
             margin: 0 16px;
+            flex-shrink: 0;
         }
 
         /* อนิเมชันชีพจรเต้นเบาๆ ที่เส้น ECG */
@@ -89,6 +91,15 @@
         }
         .ecg-line {
             animation: pulseGlow 3s infinite ease-in-out;
+        }
+
+        /* อนิเมชันเปิดหน้าต่าง Pop-up */
+        @keyframes popIn {
+            0% { opacity: 0; transform: scale(0.92) translateY(10px); }
+            100% { opacity: 1; transform: scale(1) translateY(0); }
+        }
+        .modal-animate {
+            animation: popIn 0.22s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
         }
     </style>
 </head>
@@ -133,7 +144,7 @@
         </svg>
 
         <!-- =================================================================
-             2. ส่วนเนื้อหาหลักตรงกลาง (รูปโปรไฟล์ + ชื่อ + ปุ่มลิงก์ 3 ปุ่ม)
+             2. ส่วนเนื้อหาหลักตรงกลาง (รูปโปรไฟล์ + ชื่อ + ปุ่มลิงก์ทั้ง 4 ปุ่ม)
              ================================================================= -->
         <main class="relative z-10 flex flex-col items-center px-7 pt-24 pb-44 w-full">
             
@@ -148,13 +159,7 @@
                 <!-- กรอบวงกลมรูปโปรไฟล์ -->
                 <div class="relative w-32 h-32 mx-2 rounded-full border-[4px] border-[#8cb9f3] bg-white shadow-md overflow-hidden flex-shrink-0 flex items-center justify-center">
                     
-                    <!-- =================================================================
-                         [จุดแก้ไขที่ 1 : รูปโปรไฟล์]
-                         วิธีใส่รูปของคุณ: 
-                         1. นำไฟล์รูปโปรไฟล์อัปโหลดลงใน GitHub โฟลเดอร์เดียวกับไฟล์ index.html
-                         2. ตั้งชื่อไฟล์ว่า profile.jpg (หรือเปลี่ยนชื่อตรง src="profile.jpg" ให้ตรงกับไฟล์ของคุณ)
-                         * หากยังไม่ได้อัปโหลดไฟล์ ระบบจะแสดงรูปอวตารตัวอย่างด้านล่างให้อัตโนมัติ *
-                         ================================================================= -->
+                    <!-- [จุดแก้ไขที่ 1 : รูปโปรไฟล์] -->
                     <img 
                         src="profile.jpg" 
                         alt="รูปโปรไฟล์ ปัญฑิตา มัทธญาติ" 
@@ -179,7 +184,7 @@
 
             </div>
 
-            <!-- ชื่อ-นามสกุล (สามารถแก้ไขข้อความตรงนี้ได้) -->
+            <!-- ชื่อ-นามสกุล -->
             <h1 class="text-[23px] font-bold text-[#1e3a6d] tracking-wide text-center mt-1">
                 ปัญฑิตา มัทธญาติ
             </h1>
@@ -189,14 +194,13 @@
                 <div class="h-[1.5px] flex-1 bg-[#2b4c7e]/70 rounded-full"></div>
                 <svg class="w-7 h-7 text-[#2b4c7e]" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
-                    <!-- เส้นชีพจรสีขาวในหัวใจ -->
                     <path d="M5.5 11.5H8.5L10 8.5L12 14.5L13.8 10L15 11.5H18.5" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
                 </svg>
                 <div class="h-[1.5px] flex-1 bg-[#2b4c7e]/70 rounded-full"></div>
             </div>
 
             <!-- =================================================================
-                 3. รายการปุ่มลิงก์ทั้ง 3 ปุ่ม
+                 3. รายการปุ่มลิงก์ทั้ง 4 ปุ่ม
                  ================================================================= -->
             <div class="w-full flex flex-col gap-5 mt-4 relative">
                 
@@ -286,6 +290,31 @@
                     </svg>
                 </a>
 
+                <!-- -----------------------------------------------------------------
+                     [จุดแก้ไขที่ 5 : ปุ่ม รายงานโครงงาน]
+                     นำลิงก์ Google Drive หรือลิงก์รวมรายงานโครงงาน มาวางแทนเครื่องหมาย # ในช่อง href="#"
+                     ตัวอย่าง: href="https://drive.google.com/drive/folders/..."
+                     ----------------------------------------------------------------- -->
+                <a href="#" target="_blank" rel="noopener noreferrer" class="med-button group">
+                    <div class="flex items-center">
+                        <!-- ไอคอนเอกสารรายงานโครงงาน -->
+                        <div class="w-9 h-9 flex items-center justify-center text-[#2b4c7e]">
+                            <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="8" y1="13" x2="16" y2="13"/>
+                                <line x1="8" y1="17" x2="13" y2="17"/>
+                            </svg>
+                        </div>
+                        <div class="btn-divider"></div>
+                        <span class="text-[19px] font-semibold tracking-wide">รายงานโครงงาน</span>
+                    </div>
+                    <!-- ลูกศรชี้ขวา -->
+                    <svg class="w-6 h-6 text-[#2b4c7e] transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </a>
+
             </div>
         </main>
 
@@ -359,7 +388,94 @@
             </svg>
         </footer>
 
+        <!-- =================================================================
+             5. หน้าต่าง Pop-up แสดงปุ่มย่อยรายงานโครงงาน 2 เรื่อง
+             ================================================================= -->
+        <div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center bg-[#1e3a6d]/55 backdrop-blur-[2px] px-5" onclick="if(event.target === this) closeProjectModal()">
+            <div class="w-full max-w-[390px] bg-gradient-to-b from-[#eff6ff] to-[#ffffff] border-[3px] border-[#2b4c7e] rounded-3xl p-6 shadow-2xl relative modal-animate">
+                
+                <!-- ปุ่มปิด (X) มุมขวาบน -->
+                <button type="button" onclick="closeProjectModal()" aria-label="ปิดหน้าต่าง" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white border-2 border-[#2b4c7e] text-[#2b4c7e] flex items-center justify-center hover:bg-blue-50 active:scale-95 transition">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
+                </button>
+
+                <!-- หัวข้อ Pop-up -->
+                <div class="text-center mb-6 pt-1">
+                    <span class="inline-block px-3 py-0.5 text-xs font-medium bg-blue-100 text-[#2b4c7e] rounded-full mb-1.5">เลือกเอกสารรายงาน</span>
+                    <h2 class="text-[21px] font-bold text-[#1e3a6d]">รายงานโครงงาน</h2>
+                </div>
+
+                <!-- รายการปุ่มย่อย 2 ปุ่ม -->
+                <div class="flex flex-col gap-4">
+                    
+                    <!-- -----------------------------------------------------------------
+                         [จุดแก้ไขที่ 5 : รายงานเครื่องกรองฝุ่น PM2.5]
+                         นำลิงก์ไฟล์รายงาน (Google Drive / PDF / Canva ฯลฯ) มาวางแทนเครื่องหมาย # ในช่อง href="#"
+                         ----------------------------------------------------------------- -->
+                    <a href="https://drive.google.com/drive/folders/1YVm5KdqsLFrCoIhj-nXlbEeTcCKmNGtG" target="_blank" rel="noopener noreferrer" class="med-button group !py-3.5 !px-4">
+                        <div class="flex items-center pr-2">
+                            <!-- ไอคอนกรองอากาศ/ฝุ่น -->
+                            <div class="w-8 h-8 flex-shrink-0 flex items-center justify-center text-[#2b4c7e]">
+                                <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2"/>
+                                </svg>
+                            </div>
+                            <div class="btn-divider !mx-3"></div>
+                            <span class="text-[16px] font-semibold leading-snug text-[#1e3a6d]">รายงานเครื่องกรองฝุ่น PM2.5</span>
+                        </div>
+                        <svg class="w-5 h-5 flex-shrink-0 text-[#2b4c7e] transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </a>
+
+                    <!-- -----------------------------------------------------------------
+                         [จุดแก้ไขที่ 6 : รายงานแท่งเชื้อเพลิงจากกากไขมันและกากกาแฟ]
+                         นำลิงก์ไฟล์รายงาน (Google Drive / PDF / Canva ฯลฯ) มาวางแทนเครื่องหมาย # ในช่อง href="#"
+                         ----------------------------------------------------------------- -->
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="med-button group !py-3.5 !px-4">
+                        <div class="flex items-center pr-2">
+                            <!-- ไอคอนเปลวไฟพลังงาน -->
+                            <div class="w-8 h-8 flex-shrink-0 flex items-center justify-center text-[#2b4c7e]">
+                                <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+                                </svg>
+                            </div>
+                            <div class="btn-divider !mx-3"></div>
+                            <span class="text-[15.5px] font-semibold leading-snug text-[#1e3a6d]">รายงานแท่งเชื้อเพลิงจากกากไขมันและกากกาแฟ</span>
+                        </div>
+                        <svg class="w-5 h-5 flex-shrink-0 text-[#2b4c7e] transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 18 15 12 9 6"></polyline>
+                        </svg>
+                    </a>
+
+                </div>
+
+                <!-- ปุ่มย้อนกลับด้านล่าง -->
+                <button type="button" onclick="closeProjectModal()" class="mt-6 w-full py-2.5 rounded-full bg-blue-100/80 hover:bg-blue-200/80 text-[#2b4c7e] font-medium text-sm transition">
+                    ย้อนกลับหน้าหลัก
+                </button>
+            </div>
+        </div>
+
     </div>
+
+    <!-- สคริปต์ควบคุมการเปิด-ปิดหน้าต่างรายงานโครงงาน -->
+    <script>
+        function openProjectModal() {
+            const modal = document.getElementById('project-modal');
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function closeProjectModal() {
+            const modal = document.getElementById('project-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+    </script>
 
 </body>
 </html>
