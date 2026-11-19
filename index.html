@@ -1,36 +1,365 @@
 <!DOCTYPE html>
 <html lang="th">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ปัญฑิตา มัทธญาติ</title>
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- ชื่อแท็บเว็บไซต์ (สามารถแก้ไขได้) -->
+    <title>ปัญฑิตา มัทธญาติ | Portfolio</title>
+    
+    <!-- โหลด Tailwind CSS สำหรับจัดเลย์เอาต์ -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- โหลดฟอนต์ภาษาไทย Kanit และ Prompt จาก Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;600;700&family=Prompt:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* ตั้งค่าฟอนต์หลักของเว็บไซต์ */
+        body {
+            font-family: 'Kanit', 'Prompt', sans-serif;
+            background-color: #e2e8f0; /* สีพื้นหลังรอบนอกเวลาเปิดบนหน้าจอคอมพิวเตอร์ */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* กรอบจำลองหน้าจอมือถือ (Full screen บนมือถือ, กรอบสวยๆ บนจอคอม) */
+        .app-container {
+            width: 100%;
+            max-width: 440px;
+            min-height: 100vh;
+            background: linear-gradient(180deg, #eff6ff 0%, #ffffff 45%, #e8f1fd 85%, #dbeafe 100%);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(30, 58, 138, 0.15);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* สไตล์ปุ่มทรงแคปซูลมีเงา 3 มิติสีฟ้าด้านล่างซ้ายตามภาพต้นแบบ */
+        .med-button {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            background-color: #ffffff;
+            border: 2.5px solid #2b4c7e;
+            border-radius: 9999px;
+            padding: 14px 22px;
+            color: #1e3a6d;
+            text-decoration: none;
+            /* เงา 3 มิติสีฟ้าเยื้องไปทางซ้ายล่าง */
+            box-shadow: -6px 7px 0px #6ea4e8;
+            transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), 
+                        box-shadow 0.18s cubic-bezier(0.34, 1.56, 0.64, 1),
+                        background-color 0.2s ease;
+            z-index: 10;
+        }
+
+        /* เอฟเฟกต์เมื่อเอาเมาส์ชี้ (Hover) */
+        .med-button:hover {
+            background-color: #f8fbff;
+            transform: translate(-2px, 2px);
+            box-shadow: -4px 5px 0px #528cd8;
+        }
+
+        /* เอฟเฟกต์เมื่อกดปุ่ม (Active) ยุบตัวลงไปทับเงา */
+        .med-button:active {
+            transform: translate(-6px, 7px);
+            box-shadow: 0px 0px 0px #6ea4e8;
+        }
+
+        /* เส้นคั่นแนวตั้งเล็กๆ ระหว่างไอคอนกับข้อความในปุ่ม */
+        .btn-divider {
+            width: 1.5px;
+            height: 28px;
+            background-color: #cbd5e1;
+            margin: 0 16px;
+        }
+
+        /* อนิเมชันชีพจรเต้นเบาๆ ที่เส้น ECG */
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.85; }
+            50% { opacity: 1; }
+        }
+        .ecg-line {
+            animation: pulseGlow 3s infinite ease-in-out;
+        }
+    </style>
 </head>
 <body>
-  <main class="profile-page">
-    <div class="profile-picture"></div>
 
-    <h1>ปัญฑิตา มัทธญาติ</h1>
+    <div class="app-container">
+        
+        <!-- =================================================================
+             1. ส่วนกราฟิกพื้นหลังด้านบน (คลื่นสีน้ำเงินเข้ม + Star of Life + ECG)
+             ================================================================= -->
+        <div class="absolute top-0 left-0 w-full pointer-events-none z-0">
+            <svg viewBox="0 0 440 210" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+                <!-- คลื่นสีฟ้าอ่อนชั้นรอง -->
+                <path d="M0 0H440V30C360 80 260 65 170 95C80 125 30 165 0 185V0Z" fill="#bfdbfe" fill-opacity="0.7"/>
+                <!-- คลื่นสีน้ำเงินกลาง -->
+                <path d="M0 0H390C310 60 220 50 130 85C55 114 20 140 0 155V0Z" fill="#3b69a8" fill-opacity="0.45"/>
+                <!-- คลื่นสีน้ำเงินเข้มหลัก -->
+                <path d="M0 0H335C265 55 185 45 105 80C45 106 15 125 0 138V0Z" fill="#2c4e80"/>
+                
+                <!-- สัญลักษณ์ Star of Life มุมซ้ายบน -->
+                <g transform="translate(55, 22) rotate(-10) scale(0.85)">
+                    <path d="M35 0H55V28L79 14L89 31L65 45L89 59L79 76L55 62V90H35V62L11 76L1 59L25 45L1 31L11 14L35 28V0Z" fill="#466ca3" stroke="#ffffff" stroke-width="2.5" stroke-linejoin="round"/>
+                    <!-- ไม้เท้าและงูตรงกลาง (แบบมินิมอล) -->
+                    <line x1="45" y1="16" x2="45" y2="74" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+                    <path d="M39 26C39 26 52 31 52 37C52 43 38 46 38 52C38 58 51 61 48 67" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+                </g>
 
-    <nav class="buttons">
-      <a class="button" href="#">
-        <span class="button-icon">▤</span>
-        <span class="button-text">Certificate</span>
-        <span class="arrow">›</span>
-      </a>
+                <!-- เส้นชีพจรสีขาวด้านบน -->
+                <path d="M145 48H188L196 22L206 68L216 36L223 48H275" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="ecg-line"/>
+                
+                <!-- เครื่องหมายบวก (+) สีฟ้าจาง มุมขวาบน -->
+                <path d="M365 32H379V46H393V60H379V74H365V60H351V46H365V32Z" fill="#93c5fd" fill-opacity="0.45"/>
+            </svg>
+        </div>
 
-      <a class="button" href="#">
-        <span class="button-icon pulse">⌁</span>
-        <span class="button-text">Activity</span>
-        <span class="arrow">›</span>
-      </a>
+        <!-- เครื่องหมายบวก (+) ตกแต่งพื้นหลังตรงกลางซ้ายและล่างซ้าย -->
+        <svg class="absolute top-[375px] left-[36px] w-9 h-9 text-blue-300/45 pointer-events-none z-0 -rotate-12" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M9 2h6v7h7v6h-7v7H9v-7H2V9h7V2z"/>
+        </svg>
+        <svg class="absolute bottom-[135px] left-[42px] w-11 h-11 text-blue-300/45 pointer-events-none z-0" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M9 2h6v7h7v6h-7v7H9v-7H2V9h7V2z"/>
+        </svg>
 
-      <a class="button" href="#">
-        <span class="button-icon heart">♥</span>
-        <span class="button-text">MorKhaoJai</span>
-        <span class="arrow">›</span>
-      </a>
-    </nav>
-  </main>
+        <!-- =================================================================
+             2. ส่วนเนื้อหาหลักตรงกลาง (รูปโปรไฟล์ + ชื่อ + ปุ่มลิงก์ 3 ปุ่ม)
+             ================================================================= -->
+        <main class="relative z-10 flex flex-col items-center px-7 pt-24 pb-44 w-full">
+            
+            <!-- แถวรูปโปรไฟล์ พร้อมเส้นกราฟชีพจรขนาบซ้าย-ขวา -->
+            <div class="relative flex items-center justify-center w-full mb-4">
+                
+                <!-- เส้นกราฟชีพจรด้านซ้าย -->
+                <svg class="w-24 h-12 text-[#2b4c7e] flex-shrink-0" viewBox="0 0 100 50" fill="none">
+                    <path d="M0 28H35L42 12L50 42L58 18L63 28H95" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+
+                <!-- กรอบวงกลมรูปโปรไฟล์ -->
+                <div class="relative w-32 h-32 mx-2 rounded-full border-[4px] border-[#8cb9f3] bg-white shadow-md overflow-hidden flex-shrink-0 flex items-center justify-center">
+                    
+                    <!-- =================================================================
+                         [จุดแก้ไขที่ 1 : รูปโปรไฟล์]
+                         วิธีใส่รูปของคุณ: 
+                         1. นำไฟล์รูปโปรไฟล์อัปโหลดลงใน GitHub โฟลเดอร์เดียวกับไฟล์ index.html
+                         2. ตั้งชื่อไฟล์ว่า profile.jpg (หรือเปลี่ยนชื่อตรง src="profile.jpg" ให้ตรงกับไฟล์ของคุณ)
+                         * หากยังไม่ได้อัปโหลดไฟล์ ระบบจะแสดงรูปอวตารตัวอย่างด้านล่างให้อัตโนมัติ *
+                         ================================================================= -->
+                    <img 
+                        src="profile.jpg" 
+                        alt="รูปโปรไฟล์ ปัญฑิตา มัทธญาติ" 
+                        class="w-full h-full object-cover"
+                        onerror="this.style.display='none'; document.getElementById('default-avatar').style.display='flex';"
+                    >
+                    
+                    <!-- รูปตัวอย่าง (จะแสดงอัตโนมัติเมื่อยังไม่ได้ใส่ไฟล์ profile.jpg) -->
+                    <div id="default-avatar" style="display: none;" class="w-full h-full flex-col items-center justify-center bg-blue-50 text-[#2b4c7e] p-2 text-center">
+                        <svg class="w-16 h-16 text-[#4a77b5] mb-1" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 12c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm0 2c-3.33 0-10 1.67-10 5v3h20v-3c0-3.33-6.67-5-10-5z"/>
+                        </svg>
+                        <span class="text-[10px] font-medium leading-tight text-blue-800/70">ใส่รูป<br>profile.jpg</span>
+                    </div>
+
+                </div>
+
+                <!-- เส้นกราฟชีพจรด้านขวา -->
+                <svg class="w-24 h-12 text-[#2b4c7e] flex-shrink-0" viewBox="0 0 100 50" fill="none">
+                    <path d="M5 28H37L44 12L52 42L60 18L65 28H100" stroke="currentColor" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+
+            </div>
+
+            <!-- ชื่อ-นามสกุล (สามารถแก้ไขข้อความตรงนี้ได้) -->
+            <h1 class="text-[23px] font-bold text-[#1e3a6d] tracking-wide text-center mt-1">
+                ปัญฑิตา มัทธญาติ
+            </h1>
+
+            <!-- เส้นคั่นแนวนอนพร้อมรูปหัวใจมีเส้นชีพจรตรงกลาง -->
+            <div class="flex items-center justify-center w-4/5 my-3 gap-3">
+                <div class="h-[1.5px] flex-1 bg-[#2b4c7e]/70 rounded-full"></div>
+                <svg class="w-7 h-7 text-[#2b4c7e]" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                    <!-- เส้นชีพจรสีขาวในหัวใจ -->
+                    <path d="M5.5 11.5H8.5L10 8.5L12 14.5L13.8 10L15 11.5H18.5" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                </svg>
+                <div class="h-[1.5px] flex-1 bg-[#2b4c7e]/70 rounded-full"></div>
+            </div>
+
+            <!-- =================================================================
+                 3. รายการปุ่มลิงก์ทั้ง 3 ปุ่ม
+                 ================================================================= -->
+            <div class="w-full flex flex-col gap-5 mt-4 relative">
+                
+                <!-- ขีดตกแต่ง 3 ขีดมุมขวาบนของปุ่มแรกตามภาพ -->
+                <svg class="w-8 h-8 text-[#2b4c7e] absolute -top-6 right-1 pointer-events-none" viewBox="0 0 32 32" fill="none">
+                    <line x1="6" y1="22" x2="10" y2="8" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+                    <line x1="14" y1="24" x2="22" y2="12" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+                    <line x1="19" y1="27" x2="29" y2="21" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/>
+                </svg>
+
+                <!-- -----------------------------------------------------------------
+                     [จุดแก้ไขที่ 2 : ปุ่ม Certificate]
+                     นำลิงก์ Google Drive รวมเกียรติบัตร มาวางแทนเครื่องหมาย # ในช่อง href="#"
+                     ตัวอย่าง: href="https://drive.google.com/drive/folders/..."
+                     ----------------------------------------------------------------- -->
+                <a href="#" target="_blank" rel="noopener noreferrer" class="med-button group">
+                    <div class="flex items-center">
+                        <!-- ไอคอนใบเกียรติบัตร -->
+                        <div class="w-9 h-9 flex items-center justify-center text-[#2b4c7e]">
+                            <svg class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M13 21H6a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v7"/>
+                                <line x1="8" y1="8" x2="16" y2="8"/>
+                                <line x1="8" y1="12" x2="13" y2="12"/>
+                                <circle cx="17" cy="16" r="3"/>
+                                <path d="M15.5 18.5L14.5 22l2.5-1.2L19.5 22l-1-3.5"/>
+                            </svg>
+                        </div>
+                        <div class="btn-divider"></div>
+                        <span class="text-[19px] font-semibold tracking-wide">Certificate</span>
+                    </div>
+                    <!-- ลูกศรชี้ขวา -->
+                    <svg class="w-6 h-6 text-[#2b4c7e] transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </a>
+
+                <!-- -----------------------------------------------------------------
+                     [จุดแก้ไขที่ 3 : ปุ่ม Activity]
+                     นำลิงก์ Google Drive รวมรูปกิจกรรม มาวางแทนเครื่องหมาย # ในช่อง href="#"
+                     ตัวอย่าง: href="https://drive.google.com/drive/folders/..."
+                     ----------------------------------------------------------------- -->
+                <a href="#" target="_blank" rel="noopener noreferrer" class="med-button group">
+                    <div class="flex items-center">
+                        <!-- ไอคอนเส้นชีพจร -->
+                        <div class="w-9 h-9 flex items-center justify-center text-[#2b4c7e]">
+                            <svg class="w-9 h-9" viewBox="0 0 32 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M2 13H8L11 4L15 20L19 8L21 13H30"/>
+                            </svg>
+                        </div>
+                        <div class="btn-divider"></div>
+                        <span class="text-[19px] font-semibold tracking-wide">Activity</span>
+                    </div>
+                    <!-- ลูกศรชี้ขวา -->
+                    <svg class="w-6 h-6 text-[#2b4c7e] transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </a>
+
+                <!-- -----------------------------------------------------------------
+                     [จุดแก้ไขที่ 4 : ปุ่ม MorKhaoJai (เว็บหมอเข้าใจ)]
+                     1. นำลิงก์เว็บหมอเข้าใจ มาวางแทนเครื่องหมาย # ในช่อง href="#"
+                     2. นำไฟล์รูปไอคอนที่คุณเตรียมไว้ อัปโหลดลง GitHub ชื่อไฟล์ว่า morkhaojai-icon.png
+                        (ระบบจะดึงรูปมาแสดงอัตโนมัติ หรือถ้ายังไม่ได้ใส่ จะแสดงไอคอนหัวใจบวกสำรองให้ก่อน)
+                     ----------------------------------------------------------------- -->
+                <a href="#" target="_blank" rel="noopener noreferrer" class="med-button group">
+                    <div class="flex items-center">
+                        <!-- พื้นที่ใส่รูปไอคอนเว็บหมอเข้าใจ -->
+                        <div class="w-9 h-9 flex items-center justify-center overflow-hidden rounded-lg">
+                            <img 
+                                src="morkhaojai-icon.png" 
+                                alt="ไอคอนหมอเข้าใจ" 
+                                class="w-full h-full object-contain"
+                                onerror="this.style.display='none'; document.getElementById('default-mkj-icon').style.display='block';"
+                            >
+                            <!-- ไอคอนหัวใจบวกสำรอง (จะหายไปเองเมื่อคุณใส่ไฟล์ morkhaojai-icon.png) -->
+                            <svg id="default-mkj-icon" style="display: none;" class="w-8 h-8 text-[#2b4c7e]" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/>
+                                <path d="M11 7h2v3h3v2h-3v3h-2v-3H8v-2h3V7z" fill="#ffffff"/>
+                            </svg>
+                        </div>
+                        <div class="btn-divider"></div>
+                        <span class="text-[19px] font-semibold tracking-wide">MorKhaoJai</span>
+                    </div>
+                    <!-- ลูกศรชี้ขวา -->
+                    <svg class="w-6 h-6 text-[#2b4c7e] transition-transform duration-200 group-hover:translate-x-1" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="9 18 15 12 9 6"></polyline>
+                    </svg>
+                </a>
+
+            </div>
+        </main>
+
+        <!-- =================================================================
+             4. ส่วนกราฟิกด้านล่าง (คลื่นพื้นถนน + รถพยาบาลเวกเตอร์น่ารักๆ)
+             ================================================================= -->
+        <footer class="absolute bottom-0 left-0 w-full pointer-events-none z-0">
+            <svg viewBox="0 0 440 165" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto block">
+                <!-- เนินคลื่นสีฟ้าอ่อนด้านหลัง -->
+                <path d="M0 95C110 75 230 95 440 35V165H0V95Z" fill="#bfdbfe" fill-opacity="0.6"/>
+                <!-- พื้นถนนสีฟ้ากลาง -->
+                <path d="M0 115C130 98 250 115 440 65V165H0V115Z" fill="#7aa6df" fill-opacity="0.55"/>
+                <!-- แถบคลื่นสีน้ำเงินเข้มด้านล่างสุด -->
+                <path d="M0 128C145 128 285 110 440 82V165H0V128Z" fill="#3a639c"/>
+                <!-- เส้นขอบถนนสีขาว -->
+                <path d="M125 165C220 142 330 122 440 102" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+
+                <!-- แถบขีดเฉียง 3 ขีด มุมซ้ายล่าง -->
+                <g fill="#5b8cd1" opacity="0.85">
+                    <polygon points="0,112 18,112 8,125 0,125"/>
+                    <polygon points="26,112 44,112 34,125 16,125"/>
+                    <polygon points="52,112 70,112 60,125 42,125"/>
+                </g>
+
+                <!-- รถพยาบาลเวกเตอร์ด้านขวาล่าง -->
+                <g transform="translate(245, 58) rotate(-6) scale(0.95)">
+                    <!-- เงาใต้ท้องรถ -->
+                    <ellipse cx="82" cy="86" rx="72" ry="7" fill="#1e3a6d" fill-opacity="0.25"/>
+                    
+                    <!-- ไซเรนบนหลังคารถ (แดง-น้ำเงิน) -->
+                    <path d="M56 14C56 11 59 9 63 9H73V16H56V14Z" fill="#ef4444"/>
+                    <path d="M73 9H83C87 9 90 11 90 14V16H73V9Z" fill="#2563eb"/>
+                    <rect x="69" y="9" width="8" height="7" fill="#e2e8f0"/>
+
+                    <!-- ตัวถังรถพยาบาลสีขาว -->
+                    <path d="M12 52L28 24C31 19 36 16 42 16H145C151 16 156 21 156 27V72C156 76 152 79 148 79H14C9 79 6 75 6 70V60C6 56 8 53 12 52Z" fill="#ffffff" stroke="#cbd5e1" stroke-width="1.5"/>
+                    
+                    <!-- แถบคาดสีแดงด้านข้างและหน้ารถ -->
+                    <path d="M6 62H45L54 53H156V61H56L47 68H6V62Z" fill="#ef4444"/>
+                    
+                    <!-- กระจกหน้ารถ -->
+                    <path d="M16 48L30 24C32 21 35 20 39 20H46V48H16Z" fill="#6488b4"/>
+                    <!-- เงาสะท้อนกระจกหน้า -->
+                    <polygon points="24,45 33,23 38,23 29,45" fill="#93c5fd" fill-opacity="0.45"/>
+
+                    <!-- กระจกประตูข้างคนขับ -->
+                    <path d="M52 20H72V48H52V20Z" fill="#6488b4"/>
+                    <!-- เงาสะท้อนกระจกข้าง -->
+                    <polygon points="56,45 64,23 68,23 60,45" fill="#93c5fd" fill-opacity="0.45"/>
+
+                    <!-- กระจังหน้าและไฟหน้ารถ -->
+                    <rect x="12" y="69" width="22" height="5" rx="2" fill="#475569"/>
+                    <path d="M6 56H12V61H6V56Z" fill="#fef08a"/>
+
+                    <!-- สัญลักษณ์ Star of Life สีฟ้าข้างตัวรถ -->
+                    <g transform="translate(103, 25) scale(0.32)">
+                        <path d="M35 0H55V28L79 14L89 31L65 45L89 59L79 76L55 62V90H35V62L11 76L1 59L25 45L1 31L11 14L35 28V0Z" fill="#3b69a8"/>
+                        <line x1="45" y1="15" x2="45" y2="75" stroke="#ffffff" stroke-width="5" stroke-linecap="round"/>
+                    </g>
+
+                    <!-- ซุ้มล้อและล้อหลัง -->
+                    <circle cx="132" cy="77" r="13" fill="#1e293b"/>
+                    <circle cx="132" cy="77" r="10" fill="#475569"/>
+                    <circle cx="132" cy="77" r="5" fill="#cbd5e1"/>
+
+                    <!-- ซุ้มล้อและล้อหน้า -->
+                    <circle cx="48" cy="79" r="14" fill="#1e293b"/>
+                    <circle cx="48" cy="79" r="11" fill="#475569"/>
+                    <circle cx="48" cy="79" r="5.5" fill="#cbd5e1"/>
+                </g>
+            </svg>
+        </footer>
+
+    </div>
+
 </body>
 </html>
