@@ -2,94 +2,35 @@
 <html lang="th">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#eaf2ff">
-  <title>ปัญฑิตา มัทธญาติ | Medical Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ปัญฑิตา มัทธญาติ</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="page">
-    <div class="top-wave"></div>
-    <div class="medical-star" aria-hidden="true">
-      <svg viewBox="0 0 100 100"><path d="M50 4 61 30 88 18 76 43 97 55 69 62 76 91 51 75 31 96 31 67 4 59 28 43 14 19 42 31Z"/><path class="staff" d="M52 22c-13 0-13 16 0 16s13 16 0 16-13 16 0 16M52 15v70"/></svg>
-    </div>
-    <div class="top-plus" aria-hidden="true">+</div>
-    <div class="top-ecg" aria-hidden="true">
-      <svg viewBox="0 0 340 70"><path d="M0 38h70l13-2 12-27 13 52 15-39 12 16h205"/></svg>
-    </div>
+  <main class="profile-page">
+    <div class="profile-picture"></div>
 
-    <section class="profile">
-      <!-- ใส่รูปโปรไฟล์ในวงกลมนี้ภายหลังได้ โดยเพิ่มแท็ก img -->
-      <div class="avatar-placeholder"></div>
-      <h1>ปัญฑิตา มัทธญาติ</h1>
-      <div class="heart-divider">
-        <span></span>
-        <svg viewBox="0 0 64 58" aria-hidden="true">
-          <path d="M32 54S3 37 3 19C3 2 24-4 32 12 40-4 61 2 61 19c0 18-29 35-29 35Z"/>
-          <path class="pulse" d="M9 28h12l5-11 8 23 7-16 4 4h10"/>
-        </svg>
-        <span></span>
-      </div>
-    </section>
+    <h1>ปัญฑิตา มัทธญาติ</h1>
 
-    <nav class="links" aria-label="Portfolio links">
-      <a class="link-button" href="#" aria-label="Certificate">
-        <span class="button-icon certificate-icon">
-          <svg viewBox="0 0 64 64" aria-hidden="true">
-            <path d="M13 6h34a4 4 0 0 1 4 4v43H13a4 4 0 0 1-4-4V10a4 4 0 0 1 4-4Z"/>
-            <path d="M19 19h24M19 28h24M19 37h16"/>
-            <circle cx="46" cy="45" r="9"/>
-            <path d="m41 52-2 10 7-4 7 4-2-10"/>
-          </svg>
-        </span>
-        <span class="divider"></span>
-        <span class="button-label">Certificate</span>
-        <span class="chevron"></span>
+    <nav class="buttons">
+      <a class="button" href="#">
+        <span class="button-icon">▤</span>
+        <span class="button-text">Certificate</span>
+        <span class="arrow">›</span>
       </a>
 
-      <a class="link-button" href="#" aria-label="Activity">
-        <span class="button-icon activity-icon">
-          <svg viewBox="0 0 64 64" aria-hidden="true">
-            <path d="M3 34h15l7-3 7-19 9 43 9-31 6 10h5"/>
-          </svg>
-        </span>
-        <span class="divider"></span>
-        <span class="button-label">Activity</span>
-        <span class="chevron"></span>
+      <a class="button" href="#">
+        <span class="button-icon pulse">⌁</span>
+        <span class="button-text">Activity</span>
+        <span class="arrow">›</span>
       </a>
 
-      <a class="link-button" href="#" aria-label="MorKhaoJai">
-        <span class="button-icon mor-icon">
-          <svg viewBox="0 0 64 64" aria-hidden="true">
-            <path class="heart" d="M32 57S5 41 5 22C5 6 24 1 32 16 40 1 59 6 59 22 59 41 32 57 32 57Z"/>
-            <path class="plus" d="M27 18h10v9h9v10h-9v9H27v-9h-9V27h9Z"/>
-          </svg>
-        </span>
-        <span class="divider"></span>
-        <span class="button-label">MorKhaoJai</span>
-        <span class="chevron"></span>
+      <a class="button" href="#">
+        <span class="button-icon heart">♥</span>
+        <span class="button-text">MorKhaoJai</span>
+        <span class="arrow">›</span>
       </a>
     </nav>
-
-    <div class="lower-plus plus-one" aria-hidden="true">+</div>
-    <div class="lower-plus plus-two" aria-hidden="true">+</div>
-    <div class="bottom-stripes" aria-hidden="true"><i></i><i></i><i></i></div>
-    <div class="bottom-wave"></div>
-    <div class="ambulance" aria-hidden="true">
-      <svg viewBox="0 0 330 180">
-        <path class="van-shadow" d="M17 150h292v12H17z"/>
-        <path class="van-body" d="M27 118 51 65q7-16 24-18l125-2q18 0 27 15l43 51 29 9q12 4 12 17v18H17v-22q0-12 10-15Z"/>
-        <path class="window" d="m83 57-24 52h75V55Z"/>
-        <path class="window" d="m143 55-2 54h79l-34-45q-5-8-16-8Z"/>
-        <path class="red-stripe" d="M22 116h277v15H22z"/>
-        <path class="front" d="m253 112 30 8q10 3 10 13v16h-42Z"/>
-        <path class="wheel" d="M77 143a24 24 0 1 0 48 0 24 24 0 1 0-48 0Zm144 0a24 24 0 1 0 48 0 24 24 0 1 0-48 0Z"/>
-        <path class="hub" d="M91 143a10 10 0 1 0 20 0 10 10 0 1 0-20 0Zm144 0a10 10 0 1 0 20 0 10 10 0 1 0-20 0Z"/>
-        <path class="lightbar" d="M119 38h67q7 0 7 7v7h-81v-7q0-7 7-7Z"/>
-        <path class="light-red" d="M124 39h31v12h-31z"/><path class="light-blue" d="M155 39h28v12h-28z"/>
-        <path class="star" d="M246 69h22v8h-22z M253 62h8v22h-8z"/>
-      </svg>
-    </div>
   </main>
 </body>
 </html>
